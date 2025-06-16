@@ -1,0 +1,16 @@
+// ROTA PARA ATUALIZAR REGISTRO
+app.put('/atualizar/:id', async (req, res) => {
+  const id = parseInt(req.params.id);
+  const { nome, email, celular, cidade} = req.body;
+
+  try {
+    await Funcionario.updateOne(
+      { customId: id },
+      { $set: { nome, email, celular, cidade} }
+    );
+    res.sendStatus(200);
+  } catch (err) {
+    console.error('Erro ao atualizar:', err);
+    res.status(500).send('Erro ao atualizar registro');
+  }
+});
