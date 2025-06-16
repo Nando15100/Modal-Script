@@ -1,0 +1,18 @@
+async function salvarEdicao(id) {
+            const nome = document.getElementById(`edit-nome-${id}`).value;
+            const email = document.getElementById(`edit-email-${id}`).value;
+            const celular = parseInt(document.getElementById(`edit-celular-${id}`).value);
+            const cidade = document.getElementById(`edit-cidade-${id}`).value;
+
+            
+            // Enviar para o backend
+            const res = await fetch(`/atualizar/${id}`, {
+                method: 'PUT',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ nome, email, celular, cidade})  // inclui resultado
+            });
+
+            if (res.ok) carregarDados();
+            else alert('Erro ao salvar edição');
+
+        }
