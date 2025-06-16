@@ -1,0 +1,18 @@
+// ROTA PARA SALVAR OS DADOS
+app.post('/salvar', async (req, res) => {
+  try {
+    const { nome, email, celular, cidade } = req.body;
+
+    
+    const customId = await gerarCustomId(); // -> AQUI ELE GERA UM IP FIXO PARA CADA REGISTRO
+
+    const funcionario = new Funcionario({ customId, nome, email, celular, cidade});
+    await funcionario.save();
+
+    console.log('Dados salvos:', funcionario);
+    res.status(201).json({ message: 'Dados salvos com sucesso!' });
+  } catch (error) {
+    console.error('Erro ao salvar dados:', error);
+    res.status(500).json({ message: 'Erro ao salvar dados' });
+  }
+});
