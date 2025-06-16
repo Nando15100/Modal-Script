@@ -1,0 +1,42 @@
+const botao_Salvar = document.getElementById('salvar');
+
+botao_Salvar.addEventListener('click', salvar_Banco);
+
+async function salvar_Banco(){
+
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const celular = parseInt(document.getElementById('celular').value.trim());
+    const cidade = document.getElementById('cidade').value.trim();
+
+    if (!nome || !email || !celular || !cidade){
+        alert('Preencha todos os campos!!!')
+        return;
+    }
+
+     try {
+    const resposta = await fetch('/salvar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, email, celular, cidade})
+    });
+
+    const data = await resposta.json();
+
+    if (resposta.ok) {
+      alert(data.message);
+      document.getElementById('nome').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('celular').value = '';
+      document.getElementById('cidade').value = '';
+      
+    } else {
+      alert('Erro ao salvar: ' + data.message);
+    }
+  } catch (error) {
+    alert('Erro na comunicação com o servidor.');
+    console.error(error);
+  }
+
+
+  fechar_Modal();
