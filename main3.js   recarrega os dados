@@ -1,0 +1,30 @@
+async function carregarDados() {
+            try {
+                const resposta = await fetch('/registros');
+                const dados = await resposta.json();
+                const corpo = document.getElementById('corpo-tabela');
+                corpo.innerHTML = '';
+
+                dados.forEach(item => {
+                const tr = document.createElement('tr');
+                const criadoEm = new Date(item.createdAt).toLocaleString('pt-BR');
+                tr.innerHTML = `
+                    <td>${item.customId}</td>
+                    <td>${item.nome}</td>
+                    <td>${item.email}</td>
+                    <td>${item.celular}</td>
+                    <td>${item.cidade}</td>
+                    <td>
+                    <button type="button" class="button green" onclick="iniciarEdicao(this, ${item.customId})">editar</button>
+                    <button type="button" class="button red" onclick="excluirRegistro(${item.customId})">excluir</button>
+                    </td>
+                `;
+                corpo.appendChild(tr);
+                });
+            } catch (err) {
+                console.error('Erro ao carregar dados:', err);
+            }
+   }
+
+   carregarDados();
+}
