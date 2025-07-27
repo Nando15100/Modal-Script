@@ -1,5 +1,5 @@
 // ROTA PARA LISTAR OS REGISTROS
-app.get('/registros', async (req, res) => {
+app.get('/listar_Registros', async (req, res) => {
   try {
     const registros = await Funcionario.find();
     res.json(registros);
