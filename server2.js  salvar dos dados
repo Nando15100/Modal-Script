@@ -11,6 +11,8 @@ app.post('/salvar_Banco', async (req, res) => {
 
     console.log('Dados salvos:', funcionario);
     res.status(201).json({ message: 'Dados salvos com sucesso!' });
+
+
   } catch (error) {
     console.error('Erro ao salvar dados:', error);
     res.status(500).json({ message: 'Erro ao salvar dados' });
