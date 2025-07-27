@@ -1,5 +1,5 @@
 // ROTA PARA SALVAR OS DADOS
-app.post('/salvar', async (req, res) => {
+app.post('/salvar_Banco', async (req, res) => {
   try {
     const { nome, email, celular, cidade } = req.body;
 
