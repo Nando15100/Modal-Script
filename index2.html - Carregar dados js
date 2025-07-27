@@ -1,6 +1,6 @@
 async function carregarDados() {
             try {
-                const resposta = await fetch('/registros');
+                const resposta = await fetch('/listar_Registros');
                 const dados = await resposta.json();
                 const corpo = document.getElementById('corpo-tabela');
                 corpo.innerHTML = '';
